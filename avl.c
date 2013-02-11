@@ -173,7 +173,6 @@ int bst_add_node_iter ( struct node **pptnode, int data)
 
 int bst_add_node_iter1 ( struct node **pptnode, int data)
 {
-	/// check if root is NULL
 	if ( !(*pptnode))
 	{
 		*pptnode = bst_new_node(data);
@@ -203,7 +202,6 @@ int bst_add_node_iter1 ( struct node **pptnode, int data)
 
 int bst_add_node_iter2 ( struct node **pptnode, int data)
 {
-	/// check if root is NULL
 	if ( !(*pptnode))
 	{
 		*pptnode = bst_new_node(data);
@@ -254,8 +252,10 @@ void bst_in_order_recursive( struct node *pRoot)
 	if ( pRoot != NULL)
 	{
 
-		// The sequence of RChild and pLChild will give descending and
-		// The sequence of LChild and pRChild will give ascending
+		/*
+		 * The sequence of RChild and pLChild will give descending and
+		 * The sequence of LChild and pRChild will give ascending
+		 */
 		bst_in_order_recursive(pRoot->lchild);
 		printf ( "%d\t", pRoot->data);
 		bst_in_order_recursive(pRoot->rchild);
