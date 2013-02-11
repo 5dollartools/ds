@@ -1,13 +1,3 @@
-/*
- ============================================================================
- Name        : BinarySearchTree.c
- Author      : Rahul Bedge
- Version     :
- Copyright   : GPL
- Description : Hello World in C, Ansi-style
- ============================================================================
- */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
