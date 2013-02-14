@@ -558,18 +558,6 @@ int main(void)
 	bst_add_node_recur(&pRoot, 7);
 
 	bst_breadth_first_traverse(pRoot);
-
-	pRoot = NULL; 
-	
-	bst_add_node_recur(&pRoot, 7);
-	bst_add_node_recur(&pRoot, 6);
-	bst_add_node_recur(&pRoot, 5);
-	bst_add_node_recur(&pRoot, 4);
-	bst_add_node_recur(&pRoot, 3);
-	bst_add_node_recur(&pRoot, 2);
-	bst_add_node_recur(&pRoot, 1);
-
-	bst_breadth_first_traverse(pRoot); 
 		
 	return 0;
 }
