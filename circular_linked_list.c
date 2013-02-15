@@ -87,17 +87,25 @@ int cll_delete ( struct node ** start_node, int key)
 		{
 			if ( !prev)
 			{
-				struct node *tmp_iter = iter;
+				if ( iter->next == iter)
+				{
+					*start_node = NULL; 
+				}
+				else
+				{
+					struct node *tmp_iter = iter;
+					while ( tmp_iter  && tmp_iter->next!=iter)
+						tmp_iter = tmp_iter->next;
 
-				while ( tmp_iter  && tmp_iter->next!=iter)
-					tmp_iter = tmp_iter->next;
-				
-				
+					*start_node = iter->next; 
+					tmp_iter->next = iter->next; 
+				}
 			}
 			else
 			{
 				prev->next = iter->next; 
 			}
+
 			free ( iter); 
 			break; 
 		}
@@ -126,9 +134,13 @@ int main(void)
 	cll_add_node_tail(&start_node, 50);*/
 
 	cll_print(start_node);
-	
+	cll_delete(&start_node, 30); 
+	cll_print(start_node);
 	cll_delete(&start_node, 20); 
-	
+	cll_print(start_node);
+	cll_delete(&start_node, 10); 
+	cll_print(start_node);
+	cll_delete(&start_node, 40); 	
 	cll_print(start_node);
 	
 	return EXIT_SUCCESS;
