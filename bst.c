@@ -377,18 +377,20 @@ void bst_delete_node ( struct node** pRoot, int data)
 	}
 }
 
+void bst_to_dll ( struct node ** start_node)
+{
+	if ( *start_node != NULL)
+	{
+		bst_to_dll(&(*start_node)->lchild);
+		printf ( "%d\t", (*start_node)->data);
+		bst_to_dll(&(*start_node)->rchild);
+	}
+}
+
 int main(void)
 {
 	struct node *pRoot = NULL;
 
-	bst_add_node(&pRoot, 8);
-	bst_in_order_recursive(pRoot);
-
-	bst_delete_node(&pRoot, 8);
-	printf ("\n");
-	bst_in_order_recursive(pRoot);
-
-/*
 	bst_add_node(&pRoot, 4);
 	bst_add_node(&pRoot, 12);
 	bst_add_node(&pRoot, 2);
@@ -398,60 +400,10 @@ int main(void)
 	bst_add_node(&pRoot, 3);
 	bst_add_node(&pRoot, 7);
 	bst_add_node(&pRoot, 10);
-*/
+
+	bst_to_dll(&pRoot); 
 
 
-	//printf ( "%d", bst_find_predessor(pRoot->rchild)->data);
-	//bst_delete_node(&pRoot, 8);
-	//bst_delete_node(&pRoot, 12);
-
-	bst_delete_node(&pRoot, 8);
-	printf ("\n");
-	bst_in_order_recursive(pRoot);
-
-	bst_delete_node(&pRoot, 4);
-	printf ("\n");
-	bst_in_order_recursive(pRoot);
-
-	bst_delete_node(&pRoot, 12);
-	printf ("\n");
-	bst_in_order_recursive(pRoot);
-
-	bst_delete_node(&pRoot, 2);
-	printf ("\n");
-	bst_in_order_recursive(pRoot);
-
-	bst_delete_node(&pRoot, 5);
-	printf ("\n");
-	bst_in_order_recursive(pRoot);
-
-	bst_delete_node(&pRoot, 9);
-	printf ("\n");
-	bst_in_order_recursive(pRoot);
-
-	bst_delete_node(&pRoot, 5);
-	printf ("\n");
-	bst_in_order_recursive(pRoot);
-
-	bst_delete_node(&pRoot, 9);
-	printf ("\n");
-	bst_in_order_recursive(pRoot);
-
-	bst_delete_node(&pRoot, 14);
-	printf ("\n");
-	bst_in_order_recursive(pRoot);
-
-	bst_delete_node(&pRoot, 3);
-	printf ("\n");
-	bst_in_order_recursive(pRoot);
-
-	bst_delete_node(&pRoot, 7);
-	printf ("\n");
-	bst_in_order_recursive(pRoot);
-
-	bst_delete_node(&pRoot, 10);
-	printf ("\n");
-	bst_in_order_recursive(pRoot);
 
 
 	return 0;
