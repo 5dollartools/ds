@@ -18,7 +18,13 @@ public:
 	singly_linked_list();
 	int sll_add_head(int data);
 	int sll_print() const;
-	int sll_add_tail(int data); 	
+	int sll_add_tail(int data);
+	int sll_insert_before(int key, int data); 
+	int sll_insert_after (int key, int data); 
+	int sll_delete_node(int key); 
+	bool sll_find_key(int key) const; 
+	int sll_reverese_non_recursive(); 
+	
 	~singly_linked_list();
 	
 
@@ -79,6 +85,110 @@ int singly_linked_list::sll_add_tail(int data)
 	return 0;
 }
 
+int singly_linked_list::sll_insert_before(int key, int data)
+{
+	node *iter = m_first;
+	node *prev = NULL;
+	while ( iter != NULL)
+	{
+		if ( iter->m_data == key)
+		{
+			node *tmp = new node; 
+
+			if ( tmp == NULL)
+				throw;
+
+			tmp->m_data = data;
+
+			tmp->m_next = iter;
+			
+			if ( prev == NULL)
+			{
+				m_first = tmp;
+			}
+			else
+			{
+				prev->m_next = tmp;
+			}
+			break;
+		}
+		prev = iter;
+		iter = iter->m_next;
+	}
+	return 0;
+}
+
+int singly_linked_list::sll_insert_after (int key, int data)
+{
+	node *iter = m_first;
+	while ( iter != NULL)
+	{
+		if ( iter->m_data == key)
+		{
+			node *tmp = new node; 
+
+			if ( tmp == NULL)
+				return -1;
+
+			tmp->m_data = data;
+			tmp->m_next = iter->m_next;
+			iter->m_next = tmp;
+			break;
+		}
+
+		iter = iter->m_next;
+	}
+
+	return 0;
+}
+
+bool singly_linked_list::sll_find_key( int key ) const
+{
+	bool found = false;
+	
+	node *iter = m_first; 
+	while ( iter)
+	{
+		if ( iter->m_data == key )
+		{
+			found = true;
+			break;
+		}
+		iter = iter->m_next;
+	}
+	return found;
+}
+
+
+int singly_linked_list::sll_delete_node(int key)
+{
+	if ( m_first == NULL)
+		return -1;
+
+	node *iter = m_first;
+	node *prev = NULL;
+
+	while(iter)
+	{
+		if ( iter->m_data == key)
+		{
+			if ( prev == NULL)
+			{
+				m_first = iter->m_next;
+			}
+			else
+			{
+				prev->m_next = iter->m_next;
+			}
+			delete( iter);
+			break;
+		}
+		prev = iter; 
+		iter = iter->m_next;
+	}
+	return 0;
+}
+
 int singly_linked_list::sll_print() const
 {
 	if ( m_first == NULL)
@@ -90,22 +200,44 @@ int singly_linked_list::sll_print() const
 		cout<<_iter->m_data<<"\t";
 		_iter = _iter->m_next;
 	}
-	
 	cout<<endl; 
 	return 0;
 }
 
-
+int singly_linked_list::sll_reverese_non_recursive()
+{
+	if ( m_first == NULL || m_first->m_next == NULL)
+		return -1; 
+		
+	node *iter = m_first; 
+	node *prev = NULL; 
+	node *next = NULL; 
+	while (iter)
+	{
+		next = iter->m_next; 
+		iter->m_next = prev; 
+		prev = iter; 
+		iter = next; 
+	}
+	m_first = prev; 
+	
+	return 0; 
+} 
 
 int main()
 {
 	singly_linked_list a;
-	a.sll_add_head(10);
-	a.sll_add_head(20);
-	a.sll_add_head(30);
-	a.sll_add_tail(40); 
+	a.sll_add_tail(10); 
+	a.sll_add_tail(20);
+	a.sll_add_tail(30); 
+	a.sll_add_tail(40);
 	a.sll_add_tail(50); 
+	a.sll_add_tail(60);
+
+	a.sll_print(); 
+	a.sll_reverese_non_recursive(); 
 	a.sll_print();
+	
 
 	return 0;
 }
