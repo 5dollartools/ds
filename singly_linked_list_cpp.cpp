@@ -14,6 +14,7 @@ private :
 	};
 	node *m_first;
 	int m_count;
+	void reverse_recursive(node** ); 
 public:
 	singly_linked_list();
 	int sll_add_head(int data);
@@ -24,6 +25,7 @@ public:
 	int sll_delete_node(int key); 
 	bool sll_find_key(int key) const; 
 	int sll_reverese_non_recursive(); 
+	int sll_reverese_recursive(); 
 	
 	~singly_linked_list();
 	
@@ -219,10 +221,33 @@ int singly_linked_list::sll_reverese_non_recursive()
 		prev = iter; 
 		iter = next; 
 	}
-	m_first = prev; 
+	m_first = prev;
 	
+	return 0;
+}
+
+int singly_linked_list::sll_reverese_recursive()
+{
+	reverse_recursive(&m_first); 
 	return 0; 
-} 
+}
+
+void singly_linked_list::reverse_recursive(node** _tmp)
+{
+	if (*_tmp != NULL)
+	{
+		node *first = *_tmp ;
+		node *rest = (*_tmp)->m_next;
+
+		if ( rest == NULL)
+			return;
+
+		reverse_recursive(&rest);
+		first->m_next->m_next = first;
+		first->m_next = NULL;
+		*_tmp = rest;
+	}
+}
 
 int main()
 {
@@ -235,7 +260,7 @@ int main()
 	a.sll_add_tail(60);
 
 	a.sll_print(); 
-	a.sll_reverese_non_recursive(); 
+	a.sll_reverese_recursive(); 
 	a.sll_print();
 	
 
