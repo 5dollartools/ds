@@ -26,10 +26,7 @@ public:
 	bool sll_find_key(int key) const; 
 	int sll_reverese_non_recursive(); 
 	int sll_reverese_recursive(); 
-	
 	~singly_linked_list();
-	
-
 };
 
 singly_linked_list::singly_linked_list()
