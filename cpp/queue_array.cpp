@@ -15,14 +15,15 @@ public:
 	queue(); 
 	bool is_queue_full(); 
 	bool is_queue_empty(); 
-	void operator << (int data)
+	queue& operator << (int data)
 	{
 		enqueue(data); 
+		return *this; 
 	}
-	void operator >>(int& data)
+	queue& operator >>(int& data)
 	{
 		dequeue(data); 
-		
+		return *this; 
 	}
 	
 	void print() const; 
@@ -111,14 +112,7 @@ void queue::print() const
 int main(void)
 {
 	queue a; 
-	a << 10; 
-	a << 20; 
-	a << 30; 
-	a << 40;
-	int data ; 
-	a >> data; 
-	cout << data; 
-	
+	a << 10 <<20; 
 	a.print(); 
 	
 	return 0;

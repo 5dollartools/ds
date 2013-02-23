@@ -1,27 +1,30 @@
-/*
- ============================================================================
- Name        : Stack.c
- Author      : Rahul Bedge
- Version     :
- Copyright   : Your copyright notice
- Description : Hello World in C, Ansi-style
- ============================================================================
- */
-
-
-// Define the goal for sub routines. Direction and planning needs to be done.
-
-#include <stdio.h>
-typedef  int ItemType;
-
-
+#include <iostream>
+using namespace std; 
 #define STACKSIZE 4
-#define TRUE 1
-#define FALSE 0
-#define PRINT "%d\t"
 
-ItemType stack[STACKSIZE];
-int top;
+class stack
+{
+	int m_top; 
+	int m_storage[STACKSIZE];
+	inline void push(int data); 
+	inline void pop(int& data);
+
+public:
+	stack(); 
+	bool is_full(); 
+	bool is_empty(); 
+	void operator << (int data)
+	{
+		push(data); 
+	}
+	void operator >>(int& data)
+	{
+		pop(data); 
+		
+	}
+	void print() const; 
+}; 
+
 
 int IsEmpty()
 {
