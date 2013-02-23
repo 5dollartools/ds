@@ -8,9 +8,9 @@ class singly_linked_list
 private :
 	class node
 	{
-	public:
-		int m_data;
-		node *m_next;
+		public:
+			int m_data;
+			node *m_next;
 	};
 	node *m_first;
 	int m_count;
