@@ -1,4 +1,4 @@
 ds
 ==
 
-C datastructure programs
+Datastructure programs in C and CPP
