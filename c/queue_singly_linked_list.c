@@ -19,9 +19,9 @@ struct node
 	struct node *next;
 };
 
-struct queue 
+struct queue
 {
-	int size; 
+	int size;
 	struct node* front;
 	struct node* rear;
 };
@@ -37,12 +37,12 @@ int queue_enqueue(struct queue *pQueue, queue_data data)
 {
 	if ( !pQueue)
 		return -1;
-	
-	struct node *pTempNode = malloc ( sizeof (struct node)); 
+
+	struct node *pTempNode = malloc ( sizeof (struct node));
 
 	if ( !pTempNode)
 		return -1;
-	
+
 	pTempNode->data = data;
 	pTempNode->next = NULL;
 
@@ -54,8 +54,8 @@ int queue_enqueue(struct queue *pQueue, queue_data data)
 	{
 		pQueue->rear->next = pTempNode;
 		pQueue->rear = pTempNode;
-	}	
-	pQueue->size++; 
+	}
+	pQueue->size++;
 
 	return 0;
 }
@@ -93,7 +93,7 @@ int queue_IsEmpty(struct queue *pQueue)
 }
 
 int main()
-{	
+{
 	struct queue Queue;
 	queue_initialize(&Queue);
 	queue_enqueue(&Queue, 10);
@@ -105,6 +105,6 @@ int main()
 	queue_print(&Queue);
 
 	return 0;
-		
+
 
 }

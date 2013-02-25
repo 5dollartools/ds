@@ -9,22 +9,22 @@ WINDOW * mainwin;
 
 int DrawSnake( )
 {
-	int startX = 30; 
-	int startY = 20; 
-	int countLength = 1; 
+	int startX = 30;
+	int startY = 20;
+	int countLength = 1;
 
 	for ( countLength = 1; countLength<=SNAKESIZE; countLength++)
 	{
 		attrset (COLOR_PAIR(countLength));
 		mvaddch(startY, startX+(5), '#');
 	}
-	
+
 
 }
 
 void Initialize()
 {
-	if ( (mainwin = initscr()) == NULL ) 
+	if ( (mainwin = initscr()) == NULL )
 	{
 		fprintf(stderr, "Error initialising ncurses.\n");
 		exit(EXIT_FAILURE);
@@ -38,18 +38,18 @@ void Initialize()
 	init_pair(4,  COLOR_BLACK,    COLOR_BLACK);
 }
 
-int main(void) 
+int main(void)
 {
-	int c, x, y; 
-	Initialize(); 
+	int c, x, y;
+	Initialize();
 
-	DrawSnake(); 
+	DrawSnake();
 
-	
+
 
 	refresh();
-	getch(); 
-    
+	getch();
+
 
 	/*  Clean up after ourselves  */
 	delwin(mainwin);

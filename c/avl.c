@@ -180,7 +180,7 @@ int bst_add_node_iter1 ( struct node **pptnode, int data)
 	}
 
 	struct node *pRoot = *pptnode;
-	struct node **parent_link = pptnode; 
+	struct node **parent_link = pptnode;
 
 	while (pRoot)
 	{
@@ -188,14 +188,14 @@ int bst_add_node_iter1 ( struct node **pptnode, int data)
 			return -1;
 
 		/*
-		 * Notice the comma operator. Because of the () the expression to the right is returned and on the left is evaluated. 
-		 * Comma is least priority lesser than = so braket is important and becuase we are using () we need to reverse the 
+		 * Notice the comma operator. Because of the () the expression to the right is returned and on the left is evaluated.
+		 * Comma is least priority lesser than = so braket is important and becuase we are using () we need to reverse the
 		 * sequence of pRoot->lchild and parent_link
 		 */
-		pRoot= data<pRoot->data ? (parent_link = &(pRoot->lchild), pRoot->lchild) : (parent_link = &(pRoot->rchild), pRoot->rchild); 
+		pRoot= data<pRoot->data ? (parent_link = &(pRoot->lchild), pRoot->lchild) : (parent_link = &(pRoot->rchild), pRoot->rchild);
 	}
-	
-	*parent_link = bst_new_node(data); 
+
+	*parent_link = bst_new_node(data);
 
 	return 0;
 }
@@ -209,7 +209,7 @@ int bst_add_node_iter2 ( struct node **pptnode, int data)
 	}
 
 	struct node *pRoot = *pptnode;
-	struct node **parent_link = pptnode; 
+	struct node **parent_link = pptnode;
 
 	while (pRoot)
 	{
@@ -219,30 +219,30 @@ int bst_add_node_iter2 ( struct node **pptnode, int data)
 		/*
 		 * Notice the comma operator. Because of the () the expression to the right is returned and on the left is evaluated
 		 */
-		pRoot= data<pRoot->data ? (parent_link = &(pRoot->lchild), pRoot->lchild) : (parent_link = &(pRoot->rchild), pRoot->rchild); 
-		
+		pRoot= data<pRoot->data ? (parent_link = &(pRoot->lchild), pRoot->lchild) : (parent_link = &(pRoot->rchild), pRoot->rchild);
+
 		/*
-		 * This is also an alternate way. 
+		 * This is also an alternate way.
 		 */
-		//data<pRoot->data ? (parent_link = &(pRoot->lchild); pRoot = pRoot->lchild) : (parent_link = &(pRoot->rchild); pRoot = pRoot->rchild); 
+		//data<pRoot->data ? (parent_link = &(pRoot->lchild); pRoot = pRoot->lchild) : (parent_link = &(pRoot->rchild); pRoot = pRoot->rchild);
 	}
-	
-	*parent_link = bst_new_node(data); 
+
+	*parent_link = bst_new_node(data);
 
 	return 0;
 }
 
-		
-void bst_restore_balance(struct node **); 
-	
+
+void bst_restore_balance(struct node **);
+
 void bst_add_node_recur ( struct node **ppNode, int data)
 {
 	if ( !(*ppNode ))
 		*ppNode = bst_new_node(data);
-	else 
+	else
 	{
-		bst_add_node_recur(((data < (*ppNode)->data) ? &(*ppNode)->lchild : &(*ppNode)->rchild), data); 
-		bst_restore_balance(ppNode); 
+		bst_add_node_recur(((data < (*ppNode)->data) ? &(*ppNode)->lchild : &(*ppNode)->rchild), data);
+		bst_restore_balance(ppNode);
 	}
 }
 
@@ -299,14 +299,14 @@ void bst_breadth_first_traverse(struct node *pRoot)
 			printf ( "%d ", pTemp->data);
 		else
 			printf ( "X ");
-			
+
 		if ( pTemp)
 		{
 		//if ( pTemp->lchild)
 			Enqueue(&Queue, pTemp->lchild);
 		//if ( pTemp->rchild)
 			Enqueue(&Queue, pTemp->rchild);
-			
+
 		}
 	}
 }
@@ -469,77 +469,77 @@ int bst_node_height (struct node *pNode)
 {
 	if ( pNode == NULL)
 	{
-		return 0; 
+		return 0;
 	}
 	else
 	{
-		return 1+ (bst_node_height(pNode->lchild)|bst_node_height(pNode->rchild)); 
+		return 1+ (bst_node_height(pNode->lchild)|bst_node_height(pNode->rchild));
 	}
 }
 
 int bst_node_balance_factor (struct node *pNode)
 {
 	if (!pNode)
-		return 0; 
-		
-	return bst_node_height(pNode->lchild) - bst_node_height(pNode->rchild); 
+		return 0;
+
+	return bst_node_height(pNode->lchild) - bst_node_height(pNode->rchild);
 }
 
 struct node *bst_ll_rotate(struct node *subtree_root)
 {
-	struct node *pivot = subtree_root->lchild; 
-	subtree_root->lchild = pivot->rchild; 
-	pivot->rchild = subtree_root; 
-	return pivot; 
+	struct node *pivot = subtree_root->lchild;
+	subtree_root->lchild = pivot->rchild;
+	pivot->rchild = subtree_root;
+	return pivot;
 }
 
 struct node *bst_rr_rotate(struct node *subtree_root)
 {
-	struct node *pivot = subtree_root->rchild; 
-	subtree_root->rchild = pivot->lchild; 
-	pivot->lchild = subtree_root; 
-	return pivot; 
+	struct node *pivot = subtree_root->rchild;
+	subtree_root->rchild = pivot->lchild;
+	pivot->lchild = subtree_root;
+	return pivot;
 }
 
 struct node *bst_lr_rotate(struct node *subtree_root)
 {
-	subtree_root->lchild = bst_rr_rotate(subtree_root->lchild); 
-	return bst_ll_rotate(subtree_root); 
+	subtree_root->lchild = bst_rr_rotate(subtree_root->lchild);
+	return bst_ll_rotate(subtree_root);
 }
 
 struct node *bst_rl_rotate(struct node *subtree_root)
 {
-	subtree_root->rchild = bst_ll_rotate(subtree_root->rchild); 
-	return bst_rr_rotate(subtree_root); 
+	subtree_root->rchild = bst_ll_rotate(subtree_root->rchild);
+	return bst_rr_rotate(subtree_root);
 }
 
 void bst_restore_balance(struct node **parent)
 {
-	int bf_parent = bst_node_balance_factor(*parent); 
+	int bf_parent = bst_node_balance_factor(*parent);
 	if ( bf_parent < -1)
 	{
 		if ( bst_node_balance_factor((*parent)->rchild) < 0)
 		{
-			printf ( "rr on %d\n", (*parent)->data); 
-			*parent = bst_rr_rotate(*parent); 
+			printf ( "rr on %d\n", (*parent)->data);
+			*parent = bst_rr_rotate(*parent);
 		}
 		else
 		{
-			printf ( "rl on %d\n", (*parent)->data); 
-			*parent = bst_rl_rotate(*parent); 
+			printf ( "rl on %d\n", (*parent)->data);
+			*parent = bst_rl_rotate(*parent);
 		}
 	}
 	else if ( bf_parent > 1)
 	{
 		if ( bst_node_balance_factor((*parent)->lchild) > 0)
 		{
-			printf ( "ll on %d\n", (*parent)->data); 
+			printf ( "ll on %d\n", (*parent)->data);
 			*parent = bst_ll_rotate(*parent);
-		} 
+		}
 		else
 		{
-			printf ( "lr on %d\n", (*parent)->data); 
-			*parent = bst_lr_rotate(*parent); 
+			printf ( "lr on %d\n", (*parent)->data);
+			*parent = bst_lr_rotate(*parent);
 		}
 	}
 }
@@ -558,6 +558,6 @@ int main(void)
 	bst_add_node_recur(&pRoot, 7);
 
 	bst_breadth_first_traverse(pRoot);
-		
+
 	return 0;
 }

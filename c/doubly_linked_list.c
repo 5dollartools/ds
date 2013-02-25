@@ -62,9 +62,9 @@ void dll_reverse_recursive ( struct node **ppNode)
 
 		if ( !pRemain)
 			return;
-			
-		pRemain->previous->previous = pRemain; 
-		pRemain->previous = NULL; 
+
+		pRemain->previous->previous = pRemain;
+		pRemain->previous = NULL;
 		dll_reverse_recursive(&pRemain);
 		pFirst->next->next = pFirst;
 		pFirst->next= NULL;
@@ -75,31 +75,31 @@ void dll_reverse_recursive ( struct node **ppNode)
 void dll_reverse_non_recursive(struct node **ppNode)
 {
 	if ( !*ppNode)
-		return ; 
-	struct node *pPrev = NULL; 
-	struct node *pIter = *ppNode; 
-	struct node *pIterNext = NULL; 
+		return ;
+	struct node *pPrev = NULL;
+	struct node *pIter = *ppNode;
+	struct node *pIterNext = NULL;
 	while (pIter)
 	{
-		pIterNext = pIter->next; 
+		pIterNext = pIter->next;
 		pIter->next = pIter->previous;
-		pIter->previous = pIterNext; 
-		pPrev = pIter; 
-		pIter = pIterNext; 
+		pIter->previous = pIterNext;
+		pPrev = pIter;
+		pIter = pIterNext;
 	}
-	*ppNode = pPrev; 
+	*ppNode = pPrev;
 }
 
 int dll_insert_before ( struct node **ppNode, int data )
 {
 	if ( !*ppNode )
-		return -1; 
-	
-	struct node *pTmp = malloc (sizeof (struct node)); 
-	pTmp->data = data; 
-	
-	struct node *pIter = *ppNode; 
-	struct node *pPrev = NULL; 
+		return -1;
+
+	struct node *pTmp = malloc (sizeof (struct node));
+	pTmp->data = data;
+
+	struct node *pIter = *ppNode;
+	struct node *pPrev = NULL;
 	while ( pIter)
 	{
 		if ( pIter->data == data)
@@ -107,18 +107,18 @@ int dll_insert_before ( struct node **ppNode, int data )
 			pPrev = pIter->previous;
 			if ( !pPrev)
 			{
-				pTmp->next = pIter; 
-				pTmp->previous = NULL; 
+				pTmp->next = pIter;
+				pTmp->previous = NULL;
 			}
 			else
 			{
-				
-				
+
+
 			}
-			
+
 		}
-		
-		pIter = pIter->next; 
+
+		pIter = pIter->next;
 	}
 }
 
