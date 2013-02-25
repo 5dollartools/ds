@@ -1,29 +1,29 @@
 #include <iostream>
-using namespace std; 
+using namespace std;
 #define STACKSIZE 4
 
 class stack
 {
-	int m_top; 
+	int m_top;
 	int m_storage[STACKSIZE];
-	inline void push(int data); 
+	inline void push(int data);
 	inline void pop(int& data);
 
 public:
-	stack(); 
-	bool is_full(); 
-	bool is_empty(); 
+	stack();
+	bool is_full();
+	bool is_empty();
 	void operator << (int data)
 	{
-		push(data); 
+		push(data);
 	}
 	void operator >>(int& data)
 	{
-		pop(data); 
-		
+		pop(data);
+
 	}
-	void print() const; 
-}; 
+	void print() const;
+};
 
 
 int IsEmpty()

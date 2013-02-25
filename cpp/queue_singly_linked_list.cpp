@@ -1,7 +1,7 @@
 #include <iostream>
-using namespace std; 
+using namespace std;
 
-class queue 
+class queue
 {
 	class node
 	{
@@ -9,28 +9,28 @@ class queue
 		int data;
 		node *next;
 	};
-	int size; 
+	int size;
 	node* front;
 	node* rear;
-	
-	inline void enqueue(int data); 
-	inline void dequeue(int& data); 
 
-public: 
-	queue(); 
-	~queue(); 
+	inline void enqueue(int data);
+	inline void dequeue(int& data);
+
+public:
+	queue();
+	~queue();
 	void operator << (int data)
 	{
-		enqueue(data); 
+		enqueue(data);
 	}
 	void operator >> (int& data)
 	{
-		dequeue(data); 
+		dequeue(data);
 	}
-	void print() const; 
-	bool is_empty() const; 
-	bool is_full() const; 
-}; 
+	void print() const;
+	bool is_empty() const;
+	bool is_full() const;
+};
 
 queue::queue()
 {
@@ -43,18 +43,18 @@ queue::~queue()
 {
 	while (front!=NULL)
 	{
-		delete front; 
+		delete front;
 		front = front->next;
 	}
 }
 
 void queue::enqueue(int data)
 {
-	node *tmpNode = new node; 
+	node *tmpNode = new node;
 
 	if ( tmpNode == NULL)
 		throw -1;
-	
+
 	tmpNode->data = data;
 	tmpNode->next = NULL;
 
@@ -66,8 +66,8 @@ void queue::enqueue(int data)
 	{
 		rear->next = tmpNode;
 		rear = tmpNode;
-	}	
-	size++; 
+	}
+	size++;
 }
 
 void queue::dequeue(int& data)
@@ -91,7 +91,7 @@ void queue::print() const
 		cout << pStart->data<<" ";
 		pStart = pStart->next;
 	}
-	cout<<endl; 
+	cout<<endl;
 }
 
 bool queue::is_empty() const
@@ -100,21 +100,21 @@ bool queue::is_empty() const
 }
 
 int main()
-{	
-	queue a; 
-	a<<2; 
-	a<<3; 
-	a<<4; 
-	a<<5; 
-	
-	int test; 
-	a >> test; 
-	cout<<test; 
-	a >> test; 
-	cout<<test; 
-	
-	a.print(); 
+{
+	queue a;
+	a<<2;
+	a<<3;
+	a<<4;
+	a<<5;
+
+	int test;
+	a >> test;
+	cout<<test;
+	a >> test;
+	cout<<test;
+
+	a.print();
 	return 0;
-		
+
 
 }
