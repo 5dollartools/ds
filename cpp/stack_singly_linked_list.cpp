@@ -1,108 +1,129 @@
-/*
- ============================================================================
- Name        : StackUsingSinglyLinkedList.c
- Author      : Rahul Bedge
- Version     :
- Copyright   : GPL
- Description : Stack implementation using Single linked list
- ============================================================================
- */
-
-#include <stdio.h>
-#include <stdlib.h>
-
-typedef struct _element
+#include<iostream>
+using namespace std; 
+class stack
 {
-	int key;
-	struct _element* next;
-} element, *pelement, **ppelement;
-
-int PushItem ( ppelement ppElement,int data)
-{
-
-	if ( ppElement == NULL )
-		return -1 ; 
-
-	pelement pTempElement = (pelement)malloc (sizeof(element));
-	if ( pTempElement==NULL)
-		return -1;
-
-	pTempElement->key = data;
-
-	if ( *ppElement == NULL)
+	class node
 	{
-		// this is the first node
-		pTempElement->next = NULL;
+	public:
+
+		int data;
+		node* next;
+	};
+	node* first;
+	inline int push (int data);
+	inline int pop (int& data);
+
+public:
+	stack();
+	~stack();
+	void print() const;
+	stack& operator << (int data)
+	{
+		push(data);
+		return *this; 
+	}
+	void operator >> (int& data)
+	{
+		pop(data);
+	}
+	stack& operator << (stack& s);
+	bool is_empty();
+
+};
+
+stack::stack()
+{
+	first = NULL;
+}
+
+stack::~stack()
+{
+	while ( first!=NULL)
+	{
+		node* tmp = first->next;
+		delete first;
+		first = tmp;
+	}
+}
+
+bool stack::is_empty()
+{
+	if ( first == NULL)
+	{
+		return true;
+	}
+	return false;
+}
+
+int stack::push (int data)
+{
+	node* tmp = new node; 
+
+	if ( tmp==NULL)
+		throw -1;
+
+	tmp->data = data;
+
+	if ( first == NULL)
+	{
+		tmp->next = NULL;
 	}
 	else
 	{
-		// not first element then always point the new node to the first node and set the first node point to temp node
-		pTempElement->next = *ppElement;
+		tmp->next = first;
 	}
-	*ppElement = pTempElement;
-
+	first = tmp;
 	return 0;
 }
 
-int PopItem ( ppelement ppElement, int* pData)
+int stack::pop (int& data)
 {
+	if ( first == NULL)
+		throw -2;
 
-	if ( ppElement == NULL || *ppElement == NULL)
-		return -1;
-
-	pelement pElement = (*ppElement)->next;
-	*pData = (*ppElement)->key;
-	free ( *ppElement);
-	*ppElement = pElement;
-
-
+	node* tmp = first->next;
+	data = first->data;
+	delete first;
+	first = tmp;
 	return 0;
-
 }
 
-void printStack( pelement pElement)
+void stack::print() const
 {
-	if ( pElement == NULL)
+	node* tmp = first;
+
+	while ( tmp != NULL)
 	{
-		printf ("Stack is empty\n");
-		return;
+		cout<< tmp->data<<" ";
+		tmp = tmp->next;
+	}
+	cout<<endl;
+}
+
+stack& stack::operator << (stack& s)
+{
+	while ( s.is_empty() != true )
+	{
+		int data;
+		s.pop(data);
+		push (data);
 	}
 
-	while ( pElement)
-	{
-		printf ( "%d\t", pElement->key);
-		pElement = pElement->next;
-	}
-	printf ("\n");
+	return *this;
 }
 
 int main(void)
 {
-	element* pStart = NULL;
-	int data = 0;
+	stack s, s1;
 
-	PushItem(&pStart, 10);
-	PushItem(&pStart, 20);
-	PushItem(&pStart, 30);
-	PushItem(&pStart, 40);
-	PushItem(&pStart, 50);
-	PushItem(&pStart, 60);
+	
+	s<<10<<20<<30<<40;
+	s1<<50<<60<<70<<80; 
 
-	printStack ( pStart);
-
-	PopItem(&pStart, &data);
-	printf ( "Popped data: %d\n", data);
-	printStack ( pStart);
-	PopItem(&pStart, &data);
-	printf ( "Popped data: %d\n", data);
-	printStack ( pStart);
-	PopItem(&pStart, &data);
-	printf ( "Popped data: %d\n", data);
-	printStack ( pStart);
-	PopItem(&pStart, &data);
-	printf ( "Popped data: %d\n", data);
-	printStack ( pStart);
-
-
+	s.print();
+	s<<s1; 
+	s.print();
+	cout<<"h"; 
+	s1.print();
 	return 0;
 }
